@@ -331,4 +331,9 @@ public class House {
 		Gson gson = new Gson();
 		return gson.fromJson(jsonStr, House.class);
 	}
+	
+	public static String convertToString(House house){
+		Gson gson = new Gson();
+		return gson.toJson(house);
+	}
 }
