@@ -39,6 +39,7 @@ public class Tab1Fragment extends Activity implements IXListViewListener {
 	private XListView mListView;
 	private SimpleAdapter mSimpleAdapter;
 	private List<Map<String, Object>> data = new ArrayList<Map<String, Object>>();
+	private List<House> house_list = new ArrayList<House>();
 	private Handler mHandler;
 	int page = 1;
 	int page_next;
@@ -66,6 +67,9 @@ public class Tab1Fragment extends Activity implements IXListViewListener {
 					long arg3) {
 				Intent intent = new Intent(Tab1Fragment.this,
 						Tab1HousingInfo.class);
+				House house = house_list.get(arg2);
+				String str = house.convertToString(house);
+				intent.putExtra("house",str);
 				startActivityForResult(intent, 0);
 			}
 
@@ -121,13 +125,12 @@ public class Tab1Fragment extends Activity implements IXListViewListener {
 		page = rs.getPage();
 		page_next = rs.getPage_next();
 		page_previous = rs.getPage_previous();
+		house_list.addAll(rs.getData());
 		
-		List<House> houses = rs.getData();
-		
-		int size = houses.size();
+		int size = house_list.size();
 		for (int i = 0; i < size; i++)
 		{
-			House house = houses.get(i);
+			House house = house_list.get(i);
 			Map<String, Object> map = new HashMap<String, Object>();
 //			Bitmap bmp = ImageUtils.getHttpBitmap(house.getImage());
 //		 	ImageUtils.getHttpBitmap(house.getImage_s());
@@ -153,23 +156,7 @@ public class Tab1Fragment extends Activity implements IXListViewListener {
 			data.add(map);
 		}
 		
-		mSimpleAdapter = new SimpleAdapter(this, data, R.layout.list_item, ids,
-				rids);
-		mSimpleAdapter.setViewBinder(new ViewBinder() {
-
-			@Override
-			public boolean setViewValue(View view, Object data,
-					String textRepresentation) {
-				if (view instanceof ImageView && data instanceof Bitmap) {
-					ImageView iv = (ImageView) view;
-					iv.setImageBitmap((Bitmap) data);
-					return true;
-				} else
-					return false;
-			}
-		});
-
-		mListView.setAdapter(mSimpleAdapter);
+		handler_bitmap.sendEmptyMessage(1);
 	}
 
 	private void onLoad() {
@@ -185,23 +172,31 @@ public class Tab1Fragment extends Activity implements IXListViewListener {
 			public void run() {
 				data.clear();
 				//getData();
-				mSimpleAdapter.notifyDataSetChanged();
-				mSimpleAdapter = new SimpleAdapter(Tab1Fragment.this, data,
-						R.layout.list_item, ids, rids);
-				mSimpleAdapter.setViewBinder(new ViewBinder() {
+				String str = HttpAccessUtil
+						.connServerForResult(HttpAccessUtil.ip
+								+ "api/house/house.php?op=list&page=" + page);
 
-					@Override
-					public boolean setViewValue(View view, Object data,
-							String textRepresentation) {
-						if (view instanceof ImageView && data instanceof Bitmap) {
-							ImageView iv = (ImageView) view;
-							iv.setImageBitmap((Bitmap) data);
-							return true;
-						} else
-							return false;
-					}
-				});
-				mListView.setAdapter(mSimpleAdapter);
+				System.out.println("第一页返回数据:" + str);	
+				getData(str);
+				mSimpleAdapter.notifyDataSetChanged();
+				
+				//new MyThread().doStart();
+//				mSimpleAdapter = new SimpleAdapter(Tab1Fragment.this, data,
+//						R.layout.list_item, ids, rids);
+//				mSimpleAdapter.setViewBinder(new ViewBinder() {
+//
+//					@Override
+//					public boolean setViewValue(View view, Object data,
+//							String textRepresentation) {
+//						if (view instanceof ImageView && data instanceof Bitmap) {
+//							ImageView iv = (ImageView) view;
+//							iv.setImageBitmap((Bitmap) data);
+//							return true;
+//						} else
+//							return false;
+//					}
+//				});
+//				mListView.setAdapter(mSimpleAdapter);
 				onLoad();
 			}
 		}, 2000);
@@ -213,7 +208,13 @@ public class Tab1Fragment extends Activity implements IXListViewListener {
 			@Override
 			public void run() {
 				//getData();
-				mSimpleAdapter.notifyDataSetChanged();
+//				String str = HttpAccessUtil
+//						.connServerForResult(HttpAccessUtil.ip
+//								+ "api/house/house.php?op=list&page=" + page);
+//
+//				System.out.println("第一页返回数据:" + str);	
+//				getData(str);
+//				mSimpleAdapter.notifyDataSetChanged();
 				onLoad();
 			}
 		}, 2000);
@@ -250,31 +251,32 @@ public class Tab1Fragment extends Activity implements IXListViewListener {
 	class MyThread extends Thread {
 
 		public void doStart() {
-			progressDialog = ProgressDialog.show(Tab1Fragment.this, "提示",
-					"正在请求数据请稍等......", false);
-			progressDialog.setCancelable(true);
+//			progressDialog = ProgressDialog.show(Tab1Fragment.this, "提示",
+//					"正在请求数据请稍等......", false);
+//			progressDialog.setCancelable(true);
 			this.start();
 		}
 
 		@Override
 		public void run() {
 			// TODO Auto-generated method stub
-			try {
+	//		try {
 				System.out.println("" + HttpAccessUtil.ip
-						+ "api/house/house.php?op=list&page" + page);
-				String str = HttpAccessUtil
+						+ "api/house/house.php?op=list&page=" + page);
+				str = HttpAccessUtil
 						.connServerForResult(HttpAccessUtil.ip
-								+ "api/house/house.php?op=list&page" + page);
+								+ "api/house/house.php?op=list&page=" + page);
 
 				System.out.println("第一页返回数据:" + str);
 				
 				
 				getData(str);
 				new Thread(preparedBitmap).start();;
-			} finally {
-				progressDialog.dismiss();
-				progressDialog = null;
-			}
+//			} 
+//			finally {
+//				progressDialog.dismiss();
+//				progressDialog = null;
+//			}
 		}
 	}
 	String str;
@@ -305,6 +307,24 @@ public class Tab1Fragment extends Activity implements IXListViewListener {
 					data_.put("image_listitem", temp);
 					mSimpleAdapter.notifyDataSetChanged();
 				}
+			}else if(msg.what == 1){
+				mSimpleAdapter = new SimpleAdapter(Tab1Fragment.this, data, R.layout.list_item, ids,
+						rids);
+				mSimpleAdapter.setViewBinder(new ViewBinder() {
+
+					@Override
+					public boolean setViewValue(View view, Object data,
+							String textRepresentation) {
+						if (view instanceof ImageView && data instanceof Bitmap) {
+							ImageView iv = (ImageView) view;
+							iv.setImageBitmap((Bitmap) data);
+							return true;
+						} else
+							return false;
+					}
+				});
+
+				mListView.setAdapter(mSimpleAdapter);
 			}
 		};
 	};

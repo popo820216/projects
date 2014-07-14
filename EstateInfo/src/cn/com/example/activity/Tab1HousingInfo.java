@@ -21,8 +21,10 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import cn.com.example.customview.MyDialog;
 import cn.com.example.customview.MyDialog.LeaveMeetingDialogListener;
+import cn.com.example.domain.House;
 
 public class Tab1HousingInfo extends Activity implements LocationListener {
 
@@ -41,11 +43,16 @@ public class Tab1HousingInfo extends Activity implements LocationListener {
 	private WebView webView;
 
 	Location mostRecentLocation;
+	House house;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.tab1housinginfo);
+		
+		String housestr = getIntent().getStringExtra("house");
+		System.out.println("ÏêÏ¸Ò³Ãæ£º"+housestr);
+		house = House.convertJsonToBean(housestr);
 
 		LinearLayout title = (LinearLayout) this.findViewById(R.id.title);
 		title.setBackgroundResource(R.drawable.fangyuan_title);
@@ -109,10 +116,22 @@ public class Tab1HousingInfo extends Activity implements LocationListener {
 		mPager.setAdapter(GuidePageAdapter = new GuidePageAdapter(this));
 		mPager.setOnPageChangeListener(new GuidePageChangeListener());
 
+		
+		initView();
 		// getLocation();
 		setupWebView();
 		this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
+	}
+	
+	private void initView(){
+		TextView rmb = (TextView)this.findViewById(R.id.rmb);
+		rmb.setText(house.getPrice_rmb());
+		TextView house_type = (TextView)this.findViewById(R.id.house_type);
+		rmb.setText(house.getType());
+		TextView house_area = (TextView)this.findViewById(R.id.house_area);
+		rmb.setText(house.getArea());
+		
 	}
 
 	private void getLocation() {
