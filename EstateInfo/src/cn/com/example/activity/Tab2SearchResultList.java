@@ -251,6 +251,8 @@ public class Tab2SearchResultList extends Activity implements IXListViewListener
 
 	@Override
 	public void onLoadMore() {
+		if (page >= page_next)
+			return;
 		setUrl();
 		url.append("&page=")
 		   .append(page_next);
