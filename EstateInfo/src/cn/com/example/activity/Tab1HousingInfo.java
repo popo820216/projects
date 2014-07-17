@@ -3,6 +3,7 @@ package cn.com.example.activity;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.location.Criteria;
 import android.location.Location;
@@ -73,7 +74,9 @@ public class Tab1HousingInfo extends Activity implements LocationListener {
 									dialog.dismiss();
 									break;
 								case R.id.consulting:
-									//**********这里加跳转***********
+									Intent intent = new Intent(Tab1HousingInfo.this, Tab1LeaveMsg.class);
+									intent.putExtra("hid", house.getId());
+									startActivityForResult(intent, 0);
 									break;
 								}
 							}

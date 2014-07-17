@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -20,6 +21,7 @@ import android.widget.SimpleAdapter;
 import android.widget.SimpleAdapter.ViewBinder;
 import android.widget.TextView;
 import cn.com.example.customview.XListView;
+import cn.com.example.customview.XListViewFooter;
 import cn.com.example.customview.XListView.IXListViewListener;
 import cn.com.example.domain.House;
 import cn.com.example.domain.Result;
@@ -46,6 +48,8 @@ public class Tab2SearchResultList extends Activity implements IXListViewListener
 	private int page = 1;
 	private int page_next = 1;
 	private int page_previous = 1;
+	private List<House> house_list;
+	private ProgressDialog progressDialog;
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -63,8 +67,11 @@ public class Tab2SearchResultList extends Activity implements IXListViewListener
 		
 		tempBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.pic);
 		bitmapMap = new HashMap<String,Bitmap>();
+		
 		setUrl();
 		url.append("&page=1");
+		
+		progressDialog = ProgressDialog.show(this, "提示", "正在请求数据请稍等......", false);
 		new Thread(getDataStr).start();
 		
 		mHandler = new Handler();
@@ -116,7 +123,14 @@ public class Tab2SearchResultList extends Activity implements IXListViewListener
 				for (House house: sr.getResult().getData()){
 					if (house.getId() == null)
 						continue;
-					Bitmap temp = ImageUtils.getHttpBitmap(url_);
+					Bitmap temp = null;
+					try{
+						temp = ImageUtils.getHttpBitmap(url_);
+					}catch(Exception e){
+						//e.printStackTrace();
+					}
+					if (temp == null)
+						continue;
 					bitmapMap.put(house.getId().toString(), temp);
 					handler_bitmap.sendEmptyMessage(0);
 				}
@@ -173,12 +187,14 @@ public class Tab2SearchResultList extends Activity implements IXListViewListener
 		page_next = rs.getPage_next();
 		page_previous = rs.getPage_previous();
 		
-		List<House> houses = rs.getData();
+		if (house_list == null)
+			house_list = new ArrayList<House>();
+		house_list.addAll(rs.getData());
 		
-		int size = houses.size();
+		int size = house_list.size();
 		for (int i = 0; i < size; i++)
 		{
-			House house = houses.get(i);
+			House house = house_list.get(i);
 			Map<String, Object> map = new HashMap<String, Object>();
 		//	Bitmap bmp = ImageUtils.getHttpBitmap(house.getImage());
 		// 	ImageUtils.getHttpBitmap(house.getImage_s());
@@ -220,12 +236,20 @@ public class Tab2SearchResultList extends Activity implements IXListViewListener
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
-				Map<String, Object> o1 = data.get(arg2);
+				House house = house_list.get(arg2);
+				if (house == null)
+					return;
 				Intent intent = new Intent(Tab2SearchResultList.this, Tab1HousingInfo.class);
+				intent.putExtra("house", house.convertToString(house));
 				startActivityForResult(intent, 0);
 			}
 			
 		});
+		if (progressDialog != null){
+			progressDialog.cancel();
+			progressDialog = null;
+		}
+		onLoad();
 	}
 
 	private void onLoad() {
@@ -240,19 +264,22 @@ public class Tab2SearchResultList extends Activity implements IXListViewListener
 			@Override
 			public void run() {
 				data.clear();
+				house_list.clear();
 				setUrl();
 				url.append("&page=1");
 				new Thread(getDataStr).start();
 				
-				onLoad();
+				//onLoad();
 			}
 		}, 2000);
 	}
 
 	@Override
 	public void onLoadMore() {
-		if (page >= page_next)
+		if (page >= page_next){
+			onLoad();
 			return;
+		}
 		setUrl();
 		url.append("&page=")
 		   .append(page_next);
@@ -261,7 +288,7 @@ public class Tab2SearchResultList extends Activity implements IXListViewListener
 			public void run() {
 				new Thread(getDataStr).start();
 				mSimpleAdapter.notifyDataSetChanged();
-				onLoad();
+				//onLoad();
 			}
 		}, 2000);
 	}
