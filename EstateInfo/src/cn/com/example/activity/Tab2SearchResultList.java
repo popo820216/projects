@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -20,8 +19,8 @@ import android.widget.ImageView;
 import android.widget.SimpleAdapter;
 import android.widget.SimpleAdapter.ViewBinder;
 import android.widget.TextView;
+import cn.com.example.customview.CustomProgressdialog;
 import cn.com.example.customview.XListView;
-import cn.com.example.customview.XListViewFooter;
 import cn.com.example.customview.XListView.IXListViewListener;
 import cn.com.example.domain.House;
 import cn.com.example.domain.Result;
@@ -49,7 +48,7 @@ public class Tab2SearchResultList extends Activity implements IXListViewListener
 	private int page_next = 1;
 	private int page_previous = 1;
 	private List<House> house_list;
-	private ProgressDialog progressDialog;
+	private CustomProgressdialog progressDialog;
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -71,7 +70,9 @@ public class Tab2SearchResultList extends Activity implements IXListViewListener
 		setUrl();
 		url.append("&page=1");
 		
-		progressDialog = ProgressDialog.show(this, "提示", "正在请求数据请稍等......", false);
+		progressDialog = CustomProgressdialog.createDialog(this);
+		//progressDialog.setMessage("正在加载中...");
+		progressDialog.show();
 		new Thread(getDataStr).start();
 		
 		mHandler = new Handler();
@@ -87,6 +88,8 @@ public class Tab2SearchResultList extends Activity implements IXListViewListener
 			if (msg.what == COMPLETED){
 				getData();
 				new Thread(preparedBitmap).start();;
+			}else{
+				stopProgressdialog();
 			}
 		}
 
@@ -245,10 +248,7 @@ public class Tab2SearchResultList extends Activity implements IXListViewListener
 			}
 			
 		});
-		if (progressDialog != null){
-			progressDialog.cancel();
-			progressDialog = null;
-		}
+		stopProgressdialog();
 		onLoad();
 	}
 
@@ -291,5 +291,12 @@ public class Tab2SearchResultList extends Activity implements IXListViewListener
 				//onLoad();
 			}
 		}, 2000);
+	}
+	
+	public void stopProgressdialog(){
+		if (progressDialog != null){
+			progressDialog.cancel();
+			progressDialog = null;
+		}
 	}
 }
