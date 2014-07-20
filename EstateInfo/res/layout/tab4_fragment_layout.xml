@@ -50,6 +50,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/telphone"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:background="#fff"

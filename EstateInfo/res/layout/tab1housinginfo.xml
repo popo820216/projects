@@ -466,6 +466,8 @@
 
         <ImageView
             android:id="@+id/contactus "
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:layout_width="399dp"
             android:layout_height="51dp"
             android:layout_alignParentBottom="true"

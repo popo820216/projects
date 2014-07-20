@@ -113,6 +113,9 @@
         android:id="@+id/msg_submit"
         android:background="@drawable/queren_icon"
         android:layout_alignParentBottom="true"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         />
         
 </RelativeLayout>
