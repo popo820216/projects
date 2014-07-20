@@ -239,7 +239,7 @@ public class Tab2SearchResultList extends Activity implements IXListViewListener
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
-				House house = house_list.get(arg2);
+				House house = house_list.get(arg2-1);
 				if (house == null)
 					return;
 				Intent intent = new Intent(Tab2SearchResultList.this, Tab1HousingInfo.class);
