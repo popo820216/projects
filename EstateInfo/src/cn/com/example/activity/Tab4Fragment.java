@@ -38,41 +38,41 @@ public class Tab4Fragment extends Activity {
 	
 	private void showTips(){
 		AlertDialog alertDialog = new AlertDialog.Builder(Tab4Fragment.this)
-		.setTitle("ÍË³ö³ÌĞò")
-		.setMessage("ÊÇ·ñÍË³ö³ÌĞò")
-		.setPositiveButton("È·¶¨", new DialogInterface.OnClickListener() {
+		.setTitle("é€€å‡ºç¨‹åº")
+		.setMessage("æ˜¯å¦é€€å‡ºç¨‹åº")
+		.setPositiveButton("ç¡®å®š", new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int which){
 				Tab4Fragment.this.finish();
 				System.exit(0);
 			}
 		})
-		.setNegativeButton("È¡Ïû", new DialogInterface.OnClickListener() {
+		.setNegativeButton("å–æ¶ˆ", new DialogInterface.OnClickListener() {
 		public void onClick(DialogInterface dialog, int which){
 			return;
 		}})
-		.create();  //´´½¨¶Ô»°¿ò
-		alertDialog.show(); // ÏÔÊ¾¶Ô»°¿ò
+		.create();  //åˆ›å»ºå¯¹è¯æ¡†
+		alertDialog.show(); // æ˜¾ç¤ºå¯¹è¯æ¡†
 	}
 	
 	private void showtel(){
 		AlertDialog alertDialog = new AlertDialog.Builder(Tab4Fragment.this)
-		.setTitle("ÌáÊ¾")
-		.setMessage("ÊÇ·ñ²¦´ò400-041-7515")
-		.setPositiveButton("È·¶¨", new DialogInterface.OnClickListener() {
+		.setTitle("æç¤º")
+		.setMessage("æ˜¯å¦æ‹¨æ‰“400-041-7515")
+		.setPositiveButton("ç¡®å®š", new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int which){
 				Intent phoneIntent = new Intent(
 						"android.intent.action.CALL", Uri.parse("tel:"
 								+ "400-041-7515"));
-				// å¯åŠ¨
+				// éšîˆšå§©
 				startActivity(phoneIntent);
 			}
 		})
-		.setNegativeButton("È¡Ïû", new DialogInterface.OnClickListener() {
+		.setNegativeButton("å–æ¶ˆ", new DialogInterface.OnClickListener() {
 		public void onClick(DialogInterface dialog, int which){
 			dialog.dismiss();
 		}})
-		.create();  //´´½¨¶Ô»°
-		alertDialog.show(); // ÏÔÊ¾¶Ô»°¿ò
+		.create();  //åˆ›å»ºå¯¹è¯
+		alertDialog.show(); // æ˜¾ç¤ºå¯¹è¯æ¡†
 	}
 	
 	@Override
@@ -86,32 +86,32 @@ public class Tab4Fragment extends Activity {
 	
 	final int COMMON_DIALOG = 1;
 
-	protected Dialog onCreateDialog(int id) { // ÖØĞ´onCreateDialog·½·¨
-		Dialog dialog = null; // ÉùÃ÷Ò»¸öDialog¶ÔÏóÓÃÓÚ·µ»Ø
-		switch (id) { // ¶Ôid½øĞĞÅĞ¶Ï
+	protected Dialog onCreateDialog(int id) { // é‡å†™onCreateDialogæ–¹æ³•
+		Dialog dialog = null; // å£°æ˜ä¸€ä¸ªDialogå¯¹è±¡ç”¨äºè¿”å›
+		switch (id) { // å¯¹idè¿›è¡Œåˆ¤æ–­
 		case COMMON_DIALOG:
 			Builder b = new AlertDialog.Builder(this);
-			// b.setIcon(); //ÉèÖÃ¶Ô»°¿òµÄÍ¼±ê
-			b.setTitle("ÌáÊ¾"); // ÉèÖÃ¶Ô»°¿òµÄ±êÌâ
-			b.setMessage("ÊÇ·ñÊü²¦´òµç»°"); // ÉèÖÃ¶Ô»°¿òµÄÏÔÊ¾ÄÚÈİ
-			b.setPositiveButton( // Ìí¼Ó°´Å¥
-					"È·¶¨", new DialogInterface.OnClickListener() { // Îª°´Å¥Ìí¼Ó¼àÌıÆ÷
+			// b.setIcon(); //è®¾ç½®å¯¹è¯æ¡†çš„å›¾æ ‡
+			b.setTitle("æç¤º"); // è®¾ç½®å¯¹è¯æ¡†çš„æ ‡é¢˜
+			b.setMessage("æ˜¯å¦åº¶æ‹¨æ‰“ç”µè¯"); // è®¾ç½®å¯¹è¯æ¡†çš„æ˜¾ç¤ºå†…å®¹
+			b.setPositiveButton( // æ·»åŠ æŒ‰é’®
+					"ç¡®å®š", new DialogInterface.OnClickListener() { // ä¸ºæŒ‰é’®æ·»åŠ ç›‘å¬å™¨
 						public void onClick(DialogInterface dialog, int which) {
 							// TODO Auto-generated method stub
 							System.exit(0);
 						}
 					});
-			b.setNegativeButton( // Ìí¼Ó°´Å¥
-					"È¡Ïû", new DialogInterface.OnClickListener() { // Îª°´Å¥Ìí¼Ó¼àÌıÆ÷
+			b.setNegativeButton( // æ·»åŠ æŒ‰é’®
+					"å–æ¶ˆ", new DialogInterface.OnClickListener() { // ä¸ºæŒ‰é’®æ·»åŠ ç›‘å¬å™¨
 						public void onClick(DialogInterface dialog, int which) {
 							// TODO Auto-generated method stub
 						}
 					});
-			dialog = b.create(); // Éú³ÉDialog¶ÔÏó
+			dialog = b.create(); // ç”ŸæˆDialogå¯¹è±¡
 			break;
 		default:
 			break;
 		}
-		return dialog; // ·µ»ØÉú³ÉDialogµÄ¶ÔÏó
+		return dialog; // è¿”å›ç”ŸæˆDialogçš„å¯¹è±¡
 	}
 }

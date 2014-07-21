@@ -26,11 +26,11 @@ import android.widget.ImageView;
 public class LogoMain extends Activity {
 
 	private ViewPager mPager;
-	// °ü¹ü»¬¶¯Í¼Æ¬µÄLinearLayout
+	// åŒ…è£¹æ»‘åŠ¨å›¾ç‰‡çš„LinearLayout
 	private ViewGroup viewPics;
-	// °ü¹üĞ¡Ô²µãµÄLinearLayout
+	// åŒ…è£¹å°åœ†ç‚¹çš„LinearLayout
 	private ViewGroup viewPoints;
-	// ½«Ğ¡Ô²µãµÄÍ¼Æ¬ÓÃÊı×é±íÊ¾ 
+	// å°†å°åœ†ç‚¹çš„å›¾ç‰‡ç”¨æ•°ç»„è¡¨ç¤º 
 	private ImageView[] imageViews;
 	private ImageView imageView;
 	GuidePageAdapter GuidePageAdapter;
@@ -44,24 +44,24 @@ public class LogoMain extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.logomain);
 		viewPoints = (ViewGroup) this.findViewById(R.id.viewGroup);
-		// Ìí¼ÓĞ¡Ô²µãµÄÍ¼Æ¬
+		// æ·»åŠ å°åœ†ç‚¹çš„å›¾ç‰‡
 		imageViews = new ImageView[3];
 		for (int i = 0; i < 3; i++) {
 			imageView = new ImageView(this);
-			// ÉèÖÃĞ¡Ô²µãimageviewµÄ²ÎÊı
-			imageView.setLayoutParams(new LayoutParams(15, 15));// ´´½¨Ò»¸ö¿í¸ß¾ùÎª20
-																// µÄ²¼¾Ö
+			// è®¾ç½®å°åœ†ç‚¹imageviewçš„å‚æ•°
+			imageView.setLayoutParams(new LayoutParams(15, 15));// åˆ›å»ºä¸€ä¸ªå®½é«˜å‡ä¸º20
+																// çš„å¸ƒå±€
 			imageView.setPadding(20, 0, 20, 0);
-			// ½«Ğ¡Ô²µãlayoutÌí¼Óµ½Êı×éÖĞ
+			// å°†å°åœ†ç‚¹layoutæ·»åŠ åˆ°æ•°ç»„ä¸­
 			imageViews[i] = imageView;
 
-			// Ä¬ÈÏÑ¡ÖĞµÄÊÇµÚÒ»ÕÅÍ¼Æ¬£¬´ËÊ±µÚÒ»¸öĞ¡Ô²µãÊÇÑ¡ÖĞ×´Ì¬£¬ÆäËû²»ÊÇ
+			// é»˜è®¤é€‰ä¸­çš„æ˜¯ç¬¬ä¸€å¼ å›¾ç‰‡ï¼Œæ­¤æ—¶ç¬¬ä¸€ä¸ªå°åœ†ç‚¹æ˜¯é€‰ä¸­çŠ¶æ€ï¼Œå…¶ä»–ä¸æ˜¯
 			if (i == 0) {
 				imageViews[i].setBackgroundResource(R.drawable.lan);
 			} else {
 				imageViews[i].setBackgroundResource(R.drawable.hui);
 			}
-			// ½«imageviewsÌí¼Óµ½Ğ¡Ô²µãÊÓÍ¼×é
+			// å°†imageviewsæ·»åŠ åˆ°å°åœ†ç‚¹è§†å›¾ç»„
 			viewPoints.addView(imageViews[i]);
 		}
 		
@@ -118,7 +118,7 @@ public class LogoMain extends Activity {
 			this.context = context;
 		}
 
-		// Ïú»ÙpositionÎ»ÖÃµÄ½çÃæ
+		// é”€æ¯positionä½ç½®çš„ç•Œé¢
 		@Override
 		public void destroyItem(View v, int position, Object arg2) {
 			// TODO Auto-generated method stub
@@ -132,7 +132,7 @@ public class LogoMain extends Activity {
 
 		}
 
-		// »ñÈ¡µ±Ç°´°Ìå½çÃæÊı
+		// è·å–å½“å‰çª—ä½“ç•Œé¢æ•°
 		@Override
 		public int getCount() {
 			// TODO Auto-generated method stub
@@ -140,7 +140,7 @@ public class LogoMain extends Activity {
 			// return 0;
 		}
 
-		// ³õÊ¼»¯positionÎ»ÖÃµÄ½çÃæ
+		// åˆå§‹åŒ–positionä½ç½®çš„ç•Œé¢
 		@Override
 		public Object instantiateItem(View v, int position) {
 			// TODO Auto-generated method stub
@@ -166,7 +166,7 @@ public class LogoMain extends Activity {
 			return iv;
 		}
 
-		// ÅĞ¶ÏÊÇ·ñÓÉ¶ÔÏóÉú³É½çÃæ
+		// åˆ¤æ–­æ˜¯å¦ç”±å¯¹è±¡ç”Ÿæˆç•Œé¢
 		@Override
 		public boolean isViewFromObject(View v, Object arg1) {
 			// TODO Auto-generated method stub
@@ -218,7 +218,7 @@ public class LogoMain extends Activity {
 			positionid = position;
 			for (int i = 0; i < imageViews.length; i++) {
 				imageViews[position].setBackgroundResource(R.drawable.lan);
-				// ²»ÊÇµ±Ç°Ñ¡ÖĞµÄpage£¬ÆäĞ¡Ô²µãÉèÖÃÎªÎ´Ñ¡ÖĞµÄ×´Ì¬
+				// ä¸æ˜¯å½“å‰é€‰ä¸­çš„pageï¼Œå…¶å°åœ†ç‚¹è®¾ç½®ä¸ºæœªé€‰ä¸­çš„çŠ¶æ€
 				if (position != i) {
 					imageViews[i].setBackgroundResource(R.drawable.bai);
 				}
@@ -229,20 +229,20 @@ public class LogoMain extends Activity {
 	
 	private void showTips(){
 		AlertDialog alertDialog = new AlertDialog.Builder(LogoMain.this)
-		.setTitle("ÍË³ö³ÌĞò")
-		.setMessage("ÊÇ·ñÍË³ö³ÌĞò")
-		.setPositiveButton("È·¶¨", new DialogInterface.OnClickListener() {
+		.setTitle("é€€å‡ºç¨‹åº")
+		.setMessage("æ˜¯å¦é€€å‡ºç¨‹åº")
+		.setPositiveButton("ç¡®å®š", new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int which){
 				LogoMain.this.finish();
 				System.exit(0);
 			}
 		})
-		.setNegativeButton("È¡Ïû", new DialogInterface.OnClickListener() {
+		.setNegativeButton("å–æ¶ˆ", new DialogInterface.OnClickListener() {
 		public void onClick(DialogInterface dialog, int which){
 			return;
 		}})
-		.create();  //´´½¨¶Ô»°¿ò
-		alertDialog.show(); // ÏÔÊ¾¶Ô»°¿ò
+		.create();  //åˆ›å»ºå¯¹è¯æ¡†
+		alertDialog.show(); // æ˜¾ç¤ºå¯¹è¯æ¡†
 	}
 	
 	@Override

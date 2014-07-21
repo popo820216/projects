@@ -22,14 +22,14 @@ import cn.com.example.domain.CItem;
 
 public class Tab2Fragment extends Activity {
 
-	private static final String[] city_strs = new String[]{"¶ûÍå","¿â¸ñÄÁ³¡","°²´óÂÔ","ÆæÅµ¸Ú","Ô¼°ÍÁÖ´ï","°¢¿¨µÏÑÇ","¶«¹È","×êÊ¯°É","ÂŞÀ¼¸Ú","ºËÌÒ"};
-	private static final String[] price_strs = new String[]{"50ÍòÒÔÏÂ","50Íò~100Íò","100Íò~150Íò","150Íò~200Íò","200ÍòÒÔÉÏ"};
-	private static final List<CItem> city = new ArrayList<CItem>();//{"³ÇÊĞÒ»","³ÇÊĞ¶ş","³ÇÊĞÈı","³ÇÊĞËÄ","³ÇÊĞÎå"};
-	private static final List<CItem> price = new ArrayList<CItem>();//{"¼Û¸ñÒ»","¼Û¸ñ¶ş","¼Û¸ñÈı","¼Û¸ñËÄ","¼Û¸ñÎå"};
-	private static final List<CItem> type = new ArrayList<CItem>();//{"¹«Ô¢","±ğÊû"};
-	private static final List<CItem> score = new ArrayList<CItem>();// score = {"·ÖÊıÒ»","·ÖÊı¶ş"};
-	private static final List<CItem> around = new ArrayList<CItem>();//{"»ªÈËÇø","°×ÈËÇø","»ìºÏÇø"};
-	private static final List<CItem> pool = new ArrayList<CItem>();//{"ÊÇ","·ñ"};
+	private static final String[] city_strs = new String[]{"å°”æ¹¾","åº“æ ¼ç‰§åœº","å®‰å¤§ç•¥","å¥‡è¯ºå²—","çº¦å·´æ—è¾¾","é˜¿å¡è¿ªäºš","ä¸œè°·","é’»çŸ³å§","ç½—å…°å²—","æ ¸æ¡ƒ"};
+	private static final String[] price_strs = new String[]{"50ä¸‡ä»¥ä¸‹","50ä¸‡~100ä¸‡","100ä¸‡~150ä¸‡","150ä¸‡~200ä¸‡","200ä¸‡ä»¥ä¸Š"};
+	private static final List<CItem> city = new ArrayList<CItem>();//{"åŸå¸‚ä¸€","åŸå¸‚äºŒ","åŸå¸‚ä¸‰","åŸå¸‚å››","åŸå¸‚äº”"};
+	private static final List<CItem> price = new ArrayList<CItem>();//{"ä»·æ ¼ä¸€","ä»·æ ¼äºŒ","ä»·æ ¼ä¸‰","ä»·æ ¼å››","ä»·æ ¼äº”"};
+	private static final List<CItem> type = new ArrayList<CItem>();//{"å…¬å¯“","åˆ«å¢…"};
+	private static final List<CItem> score = new ArrayList<CItem>();// score = {"åˆ†æ•°ä¸€","åˆ†æ•°äºŒ"};
+	private static final List<CItem> around = new ArrayList<CItem>();//{"åäººåŒº","ç™½äººåŒº","æ··åˆåŒº"};
+	private static final List<CItem> pool = new ArrayList<CItem>();//{"æ˜¯","å¦"};
 	
 	private ArrayAdapter<CItem> adapter_city;
 	private ArrayAdapter<CItem> adapter_price;
@@ -53,9 +53,9 @@ public class Tab2Fragment extends Activity {
 			city.add(citem_city);
 		}
 		
-		CItem citem_type0 = new CItem("0","¹«Ô¢");
+		CItem citem_type0 = new CItem("0","å…¬å¯“");
 		type.add(citem_type0);
-		CItem citem_type1 = new CItem("1","¶ÀÁ¢Îİ");
+		CItem citem_type1 = new CItem("1","ç‹¬ç«‹å±‹");
 		type.add(citem_type1);
 		
 		size = price_strs.length;
@@ -64,7 +64,7 @@ public class Tab2Fragment extends Activity {
 			price.add(citem_price);
 		}
 		
-		CItem citem_score0 = new CItem("6","6¼°6·ÖÒÔÏÂ");
+		CItem citem_score0 = new CItem("6","6åŠ6åˆ†ä»¥ä¸‹");
 		CItem citem_score1 = new CItem("7","7");
 		CItem citem_score2 = new CItem("8","8");
 		CItem citem_score3 = new CItem("9","9");
@@ -75,16 +75,16 @@ public class Tab2Fragment extends Activity {
 		score.add(citem_score3);
 		score.add(citem_score4);
 		
-		CItem citem_around0 = new CItem("0","²»ÏŞ");
-		CItem citem_around1 = new CItem("1","»ªÈËÇø");
-		CItem citem_around2 = new CItem("2","°×ÈËÇø");
+		CItem citem_around0 = new CItem("0","ä¸é™");
+		CItem citem_around1 = new CItem("1","åäººåŒº");
+		CItem citem_around2 = new CItem("2","ç™½äººåŒº");
 		
 		around.add(citem_around0);
 		around.add(citem_around1);
 		around.add(citem_around2);
 		
-		CItem citem_pool0 = new CItem("0","²»´ø");
-		CItem citem_pool1 = new CItem("1","´ø");
+		CItem citem_pool0 = new CItem("0","ä¸å¸¦");
+		CItem citem_pool1 = new CItem("1","å¸¦");
 		pool.add(citem_pool0);
 		pool.add(citem_pool1);
 	}
@@ -197,20 +197,20 @@ public class Tab2Fragment extends Activity {
 	
 	private void showTips(){
 		AlertDialog alertDialog = new AlertDialog.Builder(Tab2Fragment.this)
-		.setTitle("ÍË³ö³ÌĞò")
-		.setMessage("ÊÇ·ñÍË³ö³ÌĞò")
-		.setPositiveButton("È·¶¨", new DialogInterface.OnClickListener() {
+		.setTitle("é€€å‡ºç¨‹åº")
+		.setMessage("æ˜¯å¦é€€å‡ºç¨‹åº")
+		.setPositiveButton("ç¡®å®š", new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int which){
 				Tab2Fragment.this.finish();
 				System.exit(0);
 			}
 		})
-		.setNegativeButton("È¡Ïû", new DialogInterface.OnClickListener() {
+		.setNegativeButton("å–æ¶ˆ", new DialogInterface.OnClickListener() {
 		public void onClick(DialogInterface dialog, int which){
 			return;
 		}})
-		.create();  //´´½¨¶Ô»°¿ò
-		alertDialog.show(); // ÏÔÊ¾¶Ô»°¿ò
+		.create();  //åˆ›å»ºå¯¹è¯æ¡†
+		alertDialog.show(); // æ˜¾ç¤ºå¯¹è¯æ¡†
 	}
 	
 	@Override

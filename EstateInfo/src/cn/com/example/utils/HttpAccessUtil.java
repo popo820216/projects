@@ -12,7 +12,7 @@ import org.apache.http.params.HttpParams;
 import org.apache.http.util.EntityUtils;
 
 public class HttpAccessUtil {
-	public static String ip = "http://182.92.78.141/";
+	public static String ip = "http://api.besthouses.cn/api/";
 	
 	public static String connServerForResult(String url) {
 		HttpGet httpRequest = new HttpGet(url);

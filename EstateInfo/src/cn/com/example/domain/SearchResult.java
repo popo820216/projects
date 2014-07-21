@@ -33,7 +33,15 @@ public class SearchResult {
 	}
 
 	public static SearchResult convertJsonToBean(String jsonStr){
-		Gson gson = new Gson();
-		return gson.fromJson(jsonStr, SearchResult.class);
+		if (jsonStr != null && !"".equals(jsonStr)){
+			if (jsonStr.indexOf("error") < 0 || jsonStr.indexOf("result") < 0){
+				return null;
+			}else{
+				Gson gson = new Gson();
+				return gson.fromJson(jsonStr, SearchResult.class);
+			}
+		}else
+			return null;
+		
 	}
 }

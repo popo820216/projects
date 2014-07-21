@@ -98,12 +98,12 @@ public class Tab1Fragment extends Activity implements IXListViewListener {
 		// Map<String, Object> map = new HashMap<String, Object>();
 		// Bitmap bmp = BitmapFactory.decodeResource(res, R.drawable.pic_1);
 		// map.put("image_listitem", bmp);
-		// map.put("title_listitem", "Å¦Ô¼ÊĞ ÁùÊÒÒ»Ìü ¶ÀÁ¢¾Ó");
-		// map.put("type_listitem", "¶ÀÁ¢¾Ó×¡");
-		// map.put("housearea", "1990Ã×");
-		// map.put("floorarea", "1990Ã×");
+		// map.put("title_listitem", "çº½çº¦å¸‚ å…­å®¤ä¸€å… ç‹¬ç«‹å±…");
+		// map.put("type_listitem", "ç‹¬ç«‹å±…ä½");
+		// map.put("housearea", "1990ç±³");
+		// map.put("floorarea", "1990ç±³");
 		// map.put("price_us", "$ 70 dollar");
-		// map.put("price_cny", "200Íò");
+		// map.put("price_cny", "200ä¸‡");
 		//
 		// data.add(map);
 		// }
@@ -150,12 +150,12 @@ public class Tab1Fragment extends Activity implements IXListViewListener {
 			map.put("price_us", house.getPrice());
 			map.put("price_cny", house.getPrice_rmb());
 			map.put("id", house.getId());
-			// map.put("title_listitem", "Å¦Ô¼ÊĞ ÁùÊÒÒ»Ìü ¶ÀÁ¢¾Ó");
-			// map.put("type_listitem", "¶ÀÁ¢¾Ó×¡");
-			// map.put("housearea", "1990Ã×");
-			// map.put("floorarea", "1990Ã×");
+			// map.put("title_listitem", "çº½çº¦å¸‚ å…­å®¤ä¸€å… ç‹¬ç«‹å±…");
+			// map.put("type_listitem", "ç‹¬ç«‹å±…ä½");
+			// map.put("housearea", "1990ç±³");
+			// map.put("floorarea", "1990ç±³");
 			// map.put("price_us", "$ 70 dollar");
-			// map.put("price_cny", "200Íò");
+			// map.put("price_cny", "200ä¸‡");
 			data.add(map);
 		}
 
@@ -165,7 +165,7 @@ public class Tab1Fragment extends Activity implements IXListViewListener {
 	private void onLoad() {
 		mListView.stopRefresh();
 		mListView.stopLoadMore();
-		mListView.setRefreshTime("¸Õ¸Õ");
+		mListView.setRefreshTime("åˆšåˆš");
 	}
 
 	@Override
@@ -182,7 +182,7 @@ public class Tab1Fragment extends Activity implements IXListViewListener {
 		// .connServerForResult(HttpAccessUtil.ip
 		// + "api/house/house.php?op=list&page=" + page);
 		//
-		// System.out.println("µÚÒ»Ò³·µ»ØÊı¾İ:" + str);
+		// System.out.println("ç¬¬ä¸€é¡µè¿”å›æ•°æ®:" + str);
 		// getData(str);
 		// mSimpleAdapter.notifyDataSetChanged();
 		type = 0;
@@ -218,7 +218,7 @@ public class Tab1Fragment extends Activity implements IXListViewListener {
 		// .connServerForResult(HttpAccessUtil.ip
 		// + "api/house/house.php?op=list&page=" + page);
 		//
-		// System.out.println("µÚÒ»Ò³·µ»ØÊı¾İ:" + str);
+		// System.out.println("ç¬¬ä¸€é¡µè¿”å›æ•°æ®:" + str);
 		// getData(str);
 		// mSimpleAdapter.notifyDataSetChanged();
 		onLoad();
@@ -231,19 +231,19 @@ public class Tab1Fragment extends Activity implements IXListViewListener {
 
 	private void showTips() {
 		AlertDialog alertDialog = new AlertDialog.Builder(Tab1Fragment.this)
-				.setTitle("ÍË³ö³ÌĞò").setMessage("ÊÇ·ñÍË³ö³ÌĞò")
-				.setPositiveButton("È·¶¨", new DialogInterface.OnClickListener() {
+				.setTitle("é€€å‡ºç¨‹åº").setMessage("æ˜¯å¦é€€å‡ºç¨‹åº")
+				.setPositiveButton("ç¡®å®š", new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int which) {
 						Tab1Fragment.this.finish();
 						System.exit(0);
 					}
 				})
-				.setNegativeButton("È¡Ïû", new DialogInterface.OnClickListener() {
+				.setNegativeButton("å–æ¶ˆ", new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int which) {
 						return;
 					}
-				}).create(); // ´´½¨¶Ô»°¿ò
-		alertDialog.show(); // ÏÔÊ¾¶Ô»°¿ò
+				}).create(); // åˆ›å»ºå¯¹è¯æ¡†
+		alertDialog.show(); // æ˜¾ç¤ºå¯¹è¯æ¡†
 	}
 
 	@Override
@@ -260,8 +260,8 @@ public class Tab1Fragment extends Activity implements IXListViewListener {
 	class MyThread extends Thread {
 
 		public void doStart() {
-			 progressDialog = ProgressDialog.show(Tab1Fragment.this, "ÌáÊ¾",
-			 "ÕıÔÚÇëÇóÊı¾İÇëÉÔµÈ......", false);
+			 progressDialog = ProgressDialog.show(Tab1Fragment.this, "æç¤º",
+			 "æ­£åœ¨è¯·æ±‚æ•°æ®è¯·ç¨ç­‰......", false);
 			 progressDialog.setCancelable(true);
 			this.start();
 		}
@@ -271,11 +271,11 @@ public class Tab1Fragment extends Activity implements IXListViewListener {
 			// TODO Auto-generated method stub
 			// try {
 			System.out.println("" + HttpAccessUtil.ip
-					+ "api/house/house.php?op=list&page=" + page);
+					+ "house/house.php?op=list&page=" + page);
 			str = HttpAccessUtil.connServerForResult(HttpAccessUtil.ip
 					+ "api/house/house.php?op=list&page=" + page);
 
-			System.out.println("µÚÒ»Ò³·µ»ØÊı¾İ:" + str);
+			System.out.println("ç¬¬ä¸€é¡µè¿”å›æ•°æ®:" + str);
 
 			getData(str);
 			new Thread(preparedBitmap).start();

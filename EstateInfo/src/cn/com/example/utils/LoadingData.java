@@ -20,9 +20,9 @@ public class LoadingData extends AsyncTask<Integer, Integer, Integer> {
 	}
 
 	/**
-	 * ÕâÀïµÄInteger²ÎÊı¶ÔÓ¦AsyncTaskÖĞµÄµÚÒ»¸ö²ÎÊı ÕâÀïµÄString·µ»ØÖµ¶ÔÓ¦AsyncTaskµÄµÚÈı¸ö²ÎÊı
-	 * ¸Ã·½·¨²¢²»ÔËĞĞÔÚUIÏß³Ìµ±ÖĞ£¬Ö÷ÒªÓÃÓÚÒì²½²Ù×÷£¬ËùÓĞÔÚ¸Ã·½·¨ÖĞ²»ÄÜ¶ÔUIµ±ÖĞµÄ¿Õ¼ä½øĞĞÉèÖÃºÍĞŞ¸Ä
-	 * µ«ÊÇ¿ÉÒÔµ÷ÓÃpublishProgress·½·¨´¥·¢onProgressUpdate¶ÔUI½øĞĞ²Ù×÷
+	 * è¿™é‡Œçš„Integerå‚æ•°å¯¹åº”AsyncTaskä¸­çš„ç¬¬ä¸€ä¸ªå‚æ•° è¿™é‡Œçš„Stringè¿”å›å€¼å¯¹åº”AsyncTaskçš„ç¬¬ä¸‰ä¸ªå‚æ•°
+	 * è¯¥æ–¹æ³•å¹¶ä¸è¿è¡Œåœ¨UIçº¿ç¨‹å½“ä¸­ï¼Œä¸»è¦ç”¨äºå¼‚æ­¥æ“ä½œï¼Œæ‰€æœ‰åœ¨è¯¥æ–¹æ³•ä¸­ä¸èƒ½å¯¹UIå½“ä¸­çš„ç©ºé—´è¿›è¡Œè®¾ç½®å’Œä¿®æ”¹
+	 * ä½†æ˜¯å¯ä»¥è°ƒç”¨publishProgressæ–¹æ³•è§¦å‘onProgressUpdateå¯¹UIè¿›è¡Œæ“ä½œ
 	 */
 
 	@Override
@@ -40,11 +40,11 @@ public class LoadingData extends AsyncTask<Integer, Integer, Integer> {
 	}
 
 	/**
-	 * ÕâÀïµÄString²ÎÊı¶ÔÓ¦AsyncTaskÖĞµÄµÚÈı¸ö²ÎÊı£¨Ò²¾ÍÊÇ½ÓÊÕdoInBackgroundµÄ·µ»ØÖµ£©
-	 * ÔÚdoInBackground·½·¨Ö´ĞĞ½áÊøÖ®ºóÔÚÔËĞĞ£¬²¢ÇÒÔËĞĞÔÚUIÏß³Ìµ±ÖĞ ¿ÉÒÔ¶ÔUI¿Õ¼ä½øĞĞÉèÖÃ
+	 * è¿™é‡Œçš„Stringå‚æ•°å¯¹åº”AsyncTaskä¸­çš„ç¬¬ä¸‰ä¸ªå‚æ•°ï¼ˆä¹Ÿå°±æ˜¯æ¥æ”¶doInBackgroundçš„è¿”å›å€¼ï¼‰
+	 * åœ¨doInBackgroundæ–¹æ³•æ‰§è¡Œç»“æŸä¹‹ååœ¨è¿è¡Œï¼Œå¹¶ä¸”è¿è¡Œåœ¨UIçº¿ç¨‹å½“ä¸­ å¯ä»¥å¯¹UIç©ºé—´è¿›è¡Œè®¾ç½®
 	 */
 	protected void onPostExecute(Integer result) {
-		System.out.println("Òì²½²Ù×÷Ö´ĞĞ½áÊø:" + result);
+		System.out.println("å¼‚æ­¥æ“ä½œæ‰§è¡Œç»“æŸ:" + result);
 		progressDialog.cancel();
 		progressDialog = null;
 		switch (result) {
@@ -54,22 +54,22 @@ public class LoadingData extends AsyncTask<Integer, Integer, Integer> {
 		}
 	}
 
-	// ¸Ã·½·¨ÔËĞĞÔÚUIÏß³Ìµ±ÖĞ,²¢ÇÒÔËĞĞÔÚUIÏß³Ìµ±ÖĞ ¿ÉÒÔ¶ÔUI¿Õ¼ä½øĞĞÉèÖÃ
+	// è¯¥æ–¹æ³•è¿è¡Œåœ¨UIçº¿ç¨‹å½“ä¸­,å¹¶ä¸”è¿è¡Œåœ¨UIçº¿ç¨‹å½“ä¸­ å¯ä»¥å¯¹UIç©ºé—´è¿›è¡Œè®¾ç½®
 	@Override
 	protected void onPreExecute() {
-		System.out.println("Òì²½²Ù×÷Ö´ĞĞ¿ªÊ¼");
-		progressDialog = ProgressDialog.show(mContext, "ÌáÊ¾", "ÕıÔÚÇëÇóÊı¾İÇëÉÔµÈ......",
+		System.out.println("å¼‚æ­¥æ“ä½œæ‰§è¡Œå¼€å§‹");
+		progressDialog = ProgressDialog.show(mContext, "æç¤º", "æ­£åœ¨è¯·æ±‚æ•°æ®è¯·ç¨ç­‰......",
 				false);
 	}
 
 	/**
-	 * ÕâÀïµÄIntege²ÎÊı¶ÔÓ¦AsyncTaskÖĞµÄµÚ¶ş¸ö²ÎÊı
-	 * ÔÚdoInBackground·½·¨µ±ÖĞ£¬£¬Ã¿´Îµ÷ÓÃpublishProgress·½·¨¶¼»á´¥·¢onProgressUpdateÖ´ĞĞ
-	 * onProgressUpdateÊÇÔÚUIÏß³ÌÖĞÖ´ĞĞ£¬ËùÓĞ¿ÉÒÔ¶ÔUI¿Õ¼ä½øĞĞ²Ù×÷
+	 * è¿™é‡Œçš„Integeå‚æ•°å¯¹åº”AsyncTaskä¸­çš„ç¬¬äºŒä¸ªå‚æ•°
+	 * åœ¨doInBackgroundæ–¹æ³•å½“ä¸­ï¼Œï¼Œæ¯æ¬¡è°ƒç”¨publishProgressæ–¹æ³•éƒ½ä¼šè§¦å‘onProgressUpdateæ‰§è¡Œ
+	 * onProgressUpdateæ˜¯åœ¨UIçº¿ç¨‹ä¸­æ‰§è¡Œï¼Œæ‰€æœ‰å¯ä»¥å¯¹UIç©ºé—´è¿›è¡Œæ“ä½œ
 	 */
 	protected void onProgressUpdate(Integer... values) {
 		int vlaue = values[0];
-		System.out.println("vlae£º" + vlaue);
+		System.out.println("vlaeï¼š" + vlaue);
 	}
 
 //	public void selectdata() {
@@ -102,7 +102,7 @@ public class LoadingData extends AsyncTask<Integer, Integer, Integer> {
 //						+ (Util.CITY_ID.equals("0") ? ""
 //								: ("&workplace=" + Util.CITY_ID)));
 //			}
-//			System.out.println("ËÑË÷¹Ø¼ü×Ö:" + str);
+//			System.out.println("æœç´¢å…³é”®å­—:" + str);
 //			JSONObject jsonObject = new JSONObject(str);
 //			if (jsonObject.getString("err").equals("none")) {
 //				jsonObject = jsonObject.getJSONObject("res");

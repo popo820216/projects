@@ -29,12 +29,12 @@ public class MainActivity extends TabActivity {
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.activity_main);
-		// Òª»ñÈ¡ÆÁÄ»µÄ¿íºÍ¸ßµÈ²ÎÊı£¬Ê×ÏÈĞèÒªÉùÃ÷Ò»¸öDisplayMetrics¶ÔÏó£¬ÆÁÄ»µÄ¿í¸ßµÈÊôĞÔ´æ·ÅÔÚÕâ¸ö¶ÔÏóÖĞ
+		// è¦è·å–å±å¹•çš„å®½å’Œé«˜ç­‰å‚æ•°ï¼Œé¦–å…ˆéœ€è¦å£°æ˜ä¸€ä¸ªDisplayMetricså¯¹è±¡ï¼Œå±å¹•çš„å®½é«˜ç­‰å±æ€§å­˜æ”¾åœ¨è¿™ä¸ªå¯¹è±¡ä¸­
 		DisplayMetrics DM = new DisplayMetrics();
-		// »ñÈ¡´°¿Ú¹ÜÀíÆ÷,»ñÈ¡µ±Ç°µÄ´°¿Ú,µ÷ÓÃgetDefaultDisplay()ºó£¬Æä½«¹ØÓÚÆÁÄ»µÄÒ»Ğ©ĞÅÏ¢Ğ´½øDM¶ÔÏóÖĞ,×îºóÍ¨¹ıgetMetrics(DM)»ñÈ¡
+		// è·å–çª—å£ç®¡ç†å™¨,è·å–å½“å‰çš„çª—å£,è°ƒç”¨getDefaultDisplay()åï¼Œå…¶å°†å…³äºå±å¹•çš„ä¸€äº›ä¿¡æ¯å†™è¿›DMå¯¹è±¡ä¸­,æœ€åé€šè¿‡getMetrics(DM)è·å–
 		getWindowManager().getDefaultDisplay().getMetrics(DM);
 
-		// ´òÓ¡»ñÈ¡µÄ¿íºÍ¸ß
+		// æ‰“å°è·å–çš„å®½å’Œé«˜
 		widthPixels = DM.widthPixels;
 		heightPixels = DM.heightPixels;
 		makeTab();
@@ -131,14 +131,14 @@ public class MainActivity extends TabActivity {
 //	}
 
 //	/**
-//	 * ÍË³ö
+//	 * é€€å‡º
 //	 */
 //	@Override
 //	public boolean dispatchKeyEvent(KeyEvent event) {
 //		if (event.getKeyCode() == KeyEvent.KEYCODE_BACK
 //				&& event.getAction() == KeyEvent.ACTION_DOWN
 //				&& event.getRepeatCount() == 0) {
-//			// ¾ßÌåµÄ²Ù×÷´úÂë
+//			// å…·ä½“çš„æ“ä½œä»£ç 
 //			showDialog(COMMON_DIALOG);
 //		}
 //		return super.dispatchKeyEvent(event);
@@ -151,33 +151,33 @@ public class MainActivity extends TabActivity {
 
 //	final int COMMON_DIALOG = 1;
 //
-//	protected Dialog onCreateDialog(int id) { // ÖØĞ´onCreateDialog·½·¨
-//		Dialog dialog = null; // ÉùÃ÷Ò»¸öDialog¶ÔÏóÓÃÓÚ·µ»Ø
-//		switch (id) { // ¶Ôid½øĞĞÅĞ¶Ï
+//	protected Dialog onCreateDialog(int id) { // é‡å†™onCreateDialogæ–¹æ³•
+//		Dialog dialog = null; // å£°æ˜ä¸€ä¸ªDialogå¯¹è±¡ç”¨äºè¿”å›
+//		switch (id) { // å¯¹idè¿›è¡Œåˆ¤æ–­
 //		case COMMON_DIALOG:
 //			Builder b = new AlertDialog.Builder(this);
-//			// b.setIcon(); //ÉèÖÃ¶Ô»°¿òµÄÍ¼±ê
-//			b.setTitle(R.string.dialogTitle); // ÉèÖÃ¶Ô»°¿òµÄ±êÌâ
-//			b.setMessage(R.string.dialogMessage); // ÉèÖÃ¶Ô»°¿òµÄÏÔÊ¾ÄÚÈİ
-//			b.setPositiveButton( // Ìí¼Ó°´Å¥
-//					R.string.Ok, new DialogInterface.OnClickListener() { // Îª°´Å¥Ìí¼Ó¼àÌıÆ÷
+//			// b.setIcon(); //è®¾ç½®å¯¹è¯æ¡†çš„å›¾æ ‡
+//			b.setTitle(R.string.dialogTitle); // è®¾ç½®å¯¹è¯æ¡†çš„æ ‡é¢˜
+//			b.setMessage(R.string.dialogMessage); // è®¾ç½®å¯¹è¯æ¡†çš„æ˜¾ç¤ºå†…å®¹
+//			b.setPositiveButton( // æ·»åŠ æŒ‰é’®
+//					R.string.Ok, new DialogInterface.OnClickListener() { // ä¸ºæŒ‰é’®æ·»åŠ ç›‘å¬å™¨
 //						public void onClick(DialogInterface dialog, int which) {
 //							// TODO Auto-generated method stub
 //							System.exit(0);
 //						}
 //					});
-//			b.setNegativeButton( // Ìí¼Ó°´Å¥
-//					R.string.Cancel, new DialogInterface.OnClickListener() { // Îª°´Å¥Ìí¼Ó¼àÌıÆ÷
+//			b.setNegativeButton( // æ·»åŠ æŒ‰é’®
+//					R.string.Cancel, new DialogInterface.OnClickListener() { // ä¸ºæŒ‰é’®æ·»åŠ ç›‘å¬å™¨
 //						public void onClick(DialogInterface dialog, int which) {
 //							// TODO Auto-generated method stub
 //						}
 //					});
-//			dialog = b.create(); // Éú³ÉDialog¶ÔÏó
+//			dialog = b.create(); // ç”ŸæˆDialogå¯¹è±¡
 //			break;
 //		default:
 //			break;
 //		}
-//		return dialog; // ·µ»ØÉú³ÉDialogµÄ¶ÔÏó
+//		return dialog; // è¿”å›ç”ŸæˆDialogçš„å¯¹è±¡
 //	}
 
 }

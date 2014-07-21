@@ -71,7 +71,7 @@ public class Tab2SearchResultList extends Activity implements IXListViewListener
 		url.append("&page=1");
 		
 		progressDialog = CustomProgressdialog.createDialog(this);
-		//progressDialog.setMessage("ÕýÔÚ¼ÓÔØÖÐ...");
+		//progressDialog.setMessage("æ­£åœ¨åŠ è½½ä¸­...");
 		progressDialog.show();
 		new Thread(getDataStr).start();
 		
@@ -144,7 +144,7 @@ public class Tab2SearchResultList extends Activity implements IXListViewListener
 	private void setUrl() {
 		url = new StringBuffer();
 		url.append(HttpAccessUtil.ip)
-		   .append("api/house/house.php?op=search");
+		   .append("house/house.php?op=search");
 		
 		url.append("&City=")
 		   .append(it.getStringExtra("city"))
@@ -255,7 +255,7 @@ public class Tab2SearchResultList extends Activity implements IXListViewListener
 	private void onLoad() {
 		mListView.stopRefresh();
 		mListView.stopLoadMore();
-		mListView.setRefreshTime("¸Õ¸Õ");
+		mListView.setRefreshTime("åˆšåˆš");
 	}
 	
 	@Override

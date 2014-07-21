@@ -15,6 +15,7 @@ public class Result {
 	Integer limit;
 	
 	List<House> data;
+	List<Info> infos;
 
 	public Integer getTotal() {
 		return total;
@@ -88,6 +89,14 @@ public class Result {
 		this.data = data;
 	}
 	
+	public List<Info> getInfos() {
+		return infos;
+	}
+
+	public void setInfos(List<Info> infos) {
+		this.infos = infos;
+	}
+
 	public static Result convertJsonToBean(String jsonStr){
 		Gson gson = new Gson();
 		return gson.fromJson(jsonStr, Result.class);
