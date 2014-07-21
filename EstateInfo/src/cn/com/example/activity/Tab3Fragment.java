@@ -66,16 +66,6 @@ public class Tab3Fragment extends Activity implements IXListViewListener{
 		
 		mHandler = new Handler();
 		
-		
-		
-		getData();
-		
-		mHandler = new Handler();
-//		mAdapter = new ArrayAdapter<String>(this, R.layout.table1listitem, items);
-//		mListView.setAdapter(mAdapter);
-//		mListView.setPullLoadEnable(false);
-//		mListView.setPullRefreshEnable(false);
-		
 	}
 
 	private void setUrl() {
@@ -135,7 +125,7 @@ public class Tab3Fragment extends Activity implements IXListViewListener{
 			}
 		}
 		
-		mSimpleAdapter = new SimpleAdapter(this, data, R.layout.list_item, ids, rids);
+		mSimpleAdapter = new SimpleAdapter(this, data, R.layout.table3listitem, ids, rids);
 		mSimpleAdapter.setViewBinder(new ViewBinder() {
 			@Override
 			public boolean setViewValue(View view, Object data, String textRepresentation) {

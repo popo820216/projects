@@ -172,50 +172,42 @@ public class Tab2SearchResultList extends Activity implements IXListViewListener
 		SearchResult sr = SearchResult.convertJsonToBean(jsonStr);
 		
 		if (sr == null){
-			tv.setVisibility(View.VISIBLE);
-			return;
+			sr = new SearchResult();
 		}
 		
 		Result rs = sr.getResult();
-		if (rs == null || rs.getTotal() == 0){
-			tv.setVisibility(View.VISIBLE);
-			return;
-		}
-		
-		if (rs.getCount() == 0){
-			return;
-		}
-		
-		page = rs.getPage();
-		page_next = rs.getPage_next();
-		page_previous = rs.getPage_previous();
-		
-		if (house_list == null)
-			house_list = new ArrayList<House>();
-		house_list.addAll(rs.getData());
-		
-		int size = house_list.size();
-		for (int i = 0; i < size; i++)
-		{
-			House house = house_list.get(i);
-			Map<String, Object> map = new HashMap<String, Object>();
-		//	Bitmap bmp = ImageUtils.getHttpBitmap(house.getImage());
-		// 	ImageUtils.getHttpBitmap(house.getImage_s());
-//			Bitmap bmp = bitmapMap.get(house.getId().toString());
-//			if (bmp == null)
-//				map.put("image_listitem", tempBitmap);
-//			else
-//				map.put("image_listitem", bmp);
-			map.put("image_listitem", tempBitmap);
-			map.put("title_listitem", house.getTitle());
-			map.put("type_listitem", house.getType());
-			map.put("housearea", house.getArea());
-			map.put("floorarea", house.getCovers());
-			map.put("price_us", house.getPrice());
-			map.put("price_cny", house.getPrice_rmb());
-			map.put("id", house.getId());
+		if (rs != null && rs.getTotal() != 0){
+			page = rs.getPage();
+			page_next = rs.getPage_next();
+			page_previous = rs.getPage_previous();
 			
-			data.add(map);
+			if (house_list == null)
+				house_list = new ArrayList<House>();
+			house_list.addAll(rs.getData());
+			
+			int size = house_list.size();
+			for (int i = 0; i < size; i++)
+			{
+				House house = house_list.get(i);
+				Map<String, Object> map = new HashMap<String, Object>();
+			//	Bitmap bmp = ImageUtils.getHttpBitmap(house.getImage());
+			// 	ImageUtils.getHttpBitmap(house.getImage_s());
+//				Bitmap bmp = bitmapMap.get(house.getId().toString());
+//				if (bmp == null)
+//					map.put("image_listitem", tempBitmap);
+//				else
+//					map.put("image_listitem", bmp);
+				map.put("image_listitem", tempBitmap);
+				map.put("title_listitem", house.getTitle());
+				map.put("type_listitem", house.getType());
+				map.put("housearea", house.getArea());
+				map.put("floorarea", house.getCovers());
+				map.put("price_us", house.getPrice());
+				map.put("price_cny", house.getPrice_rmb());
+				map.put("id", house.getId());
+				
+				data.add(map);
+			}
 		}
 		
 		mSimpleAdapter = new SimpleAdapter(this, data, R.layout.list_item, ids, rids);
