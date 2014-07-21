@@ -110,35 +110,29 @@ public class Tab3Fragment extends Activity implements IXListViewListener{
 		
 		if (sr == null){
 		//	tv.setVisibility(View.VISIBLE);
-			return;
+			sr = new SearchResult();
 		}
 		
 		Result rs = sr.getResult();
-		if (rs == null || rs.getTotal() == 0){
+		if (rs != null && rs.getTotal() != 0){
 		//	tv.setVisibility(View.VISIBLE);
-			return;
-		}
-		
-		if (rs.getCount() == 0){
-			return;
-		}
-		
-		page = rs.getPage();
-		page_next = rs.getPage_next();
-		page_previous = rs.getPage_previous();
-		
-		if (info_list == null)
-			info_list = new ArrayList<Info>();
-		info_list.addAll(rs.getInfos());
-		
-		int size = info_list.size();
-		for (int i = 0; i < size; i++)
-		{
-			Info info = info_list.get(i);
-			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("id", info.getId());
-			map.put("content", info.getContent());
-			data.add(map);
+			page = rs.getPage();
+			page_next = rs.getPage_next();
+			page_previous = rs.getPage_previous();
+			
+			if (info_list == null)
+				info_list = new ArrayList<Info>();
+			info_list.addAll(rs.getInfos());
+			
+			int size = info_list.size();
+			for (int i = 0; i < size; i++)
+			{
+				Info info = info_list.get(i);
+				Map<String, Object> map = new HashMap<String, Object>();
+				map.put("id", info.getId());
+				map.put("content", info.getContent());
+				data.add(map);
+			}
 		}
 		
 		mSimpleAdapter = new SimpleAdapter(this, data, R.layout.list_item, ids, rids);

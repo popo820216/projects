@@ -34,14 +34,11 @@ public class SearchResult {
 
 	public static SearchResult convertJsonToBean(String jsonStr){
 		if (jsonStr != null && !"".equals(jsonStr)){
-			if (jsonStr.indexOf("error") < 0 || jsonStr.indexOf("result") < 0){
-				return null;
-			}else{
+			if (jsonStr.indexOf("error") < 0 || jsonStr.indexOf("result") >= 0){
 				Gson gson = new Gson();
 				return gson.fromJson(jsonStr, SearchResult.class);
 			}
-		}else
-			return null;
-		
+		}
+		return null;
 	}
 }
