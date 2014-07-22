@@ -273,7 +273,7 @@ public class Tab1Fragment extends Activity implements IXListViewListener {
 			System.out.println("" + HttpAccessUtil.ip
 					+ "house/house.php?op=list&page=" + page);
 			str = HttpAccessUtil.connServerForResult(HttpAccessUtil.ip
-					+ "api/house/house.php?op=list&page=" + page);
+					+ "house/house.php?op=list&page=" + page);
 
 			System.out.println("第一页返回数据:" + str);
 
