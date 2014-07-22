@@ -9,6 +9,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.HttpParams;
+import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 
 public class HttpAccessUtil {
@@ -23,7 +24,7 @@ public class HttpAccessUtil {
 			httpClient = new DefaultHttpClient();
 			httpResponse = httpClient.execute(httpRequest);
 			if (httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK){
-				result = EntityUtils.toString(httpResponse.getEntity());
+				result = EntityUtils.toString(httpResponse.getEntity(),HTTP.UTF_8);
 			}
 		}catch(Exception e){
 			e.printStackTrace();
@@ -47,7 +48,7 @@ public class HttpAccessUtil {
 			httpClient = new DefaultHttpClient();
 			httpResponse = httpClient.execute(httpRequest);
 			if (httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK){
-				result = EntityUtils.toString(httpResponse.getEntity());
+				result = EntityUtils.toString(httpResponse.getEntity(), HTTP.UTF_8);
 			}
 		}catch(Exception e){
 			e.printStackTrace();
