@@ -112,23 +112,13 @@ public class Tab2SearchResultList extends Activity implements IXListViewListener
 				if (sr == null || sr.getResult() == null || sr.getResult().getData().isEmpty())
 					return;
 				Map<String,String> params = new HashMap<String,String>();
-				String url_ = "http://picm.photophoto.cn/002/026/008/0260080065.jpg";
-//				for (House house: tr.getResult()){
-//					if (house.getId() == null)
-//						continue;
-//					params.put(house.getId().toString(), url_);
-//				}
-//				bitmapMap = ImageUtils.getHttpBitmaps(params);
-//				Message msg = new Message();
-//				msg.what = COMPLETED;
-//				handler_bitmap.sendMessage(msg);
 				
 				for (House house: sr.getResult().getData()){
 					if (house.getId() == null)
 						continue;
 					Bitmap temp = null;
 					try{
-						temp = ImageUtils.getHttpBitmap(url_);
+						temp = ImageUtils.getHttpBitmap(house.getImage_s());
 					}catch(Exception e){
 						//e.printStackTrace();
 					}
@@ -146,16 +136,45 @@ public class Tab2SearchResultList extends Activity implements IXListViewListener
 		url.append(HttpAccessUtil.ip)
 		   .append("house/house.php?op=search");
 		
-		url.append("&City=")
-		   .append(it.getStringExtra("city"))
-		   .append("&type=")
-		   .append(it.getStringExtra("type"))
-		   .append("&districtscore=")
-		   .append(it.getStringExtra("districtscore"))
-		   .append("&regionnature=")
-		   .append(it.getStringExtra("regionnature"))
-		   .append("&swimmingpool=")
-		   .append(it.getStringExtra("swimmingpool"));
+		String city = it.getStringExtra("city");
+		if (!"".equals(city)){
+			url.append("&city=")
+			   .append(city);
+		}
+		
+		String type = it.getStringExtra("type");
+		if (!"-1".equals(type)){
+			url.append("&type=")
+			   .append(type);
+		}
+		
+		String districtscore = it.getStringExtra("districtscore");
+		if (!"0".equals(districtscore)){
+			url.append("&districtscore=")
+			   .append(districtscore);
+		}
+		
+		String regionnature = it.getStringExtra("regionnature");
+		if (!"0".equals(regionnature)){
+			url.append("&regionnature=")
+			   .append(regionnature);
+		}
+		
+		String swimmingpool = it.getStringExtra("swimmingpool");
+		if (!"-1".equals(swimmingpool)){
+			url.append("&swimmingpool=")
+			   .append(swimmingpool);
+		}
+		
+		String rprice = it.getStringExtra("rprice");
+		String lprice = it.getStringExtra("lprice");
+		if (!"0".equals(rprice)){
+			url.append("&lprice=")
+			   .append(lprice)
+			   .append("&rprice=")
+			   .append(rprice);
+			
+		}
 	}
 
 	Runnable getDataStr = new Runnable(){

@@ -29,8 +29,8 @@ import cn.com.example.domain.SearchResult;
 import cn.com.example.utils.HttpAccessUtil;
 
 public class Tab3Fragment extends Activity implements IXListViewListener{
-	private String[] ids = {"content_tab3","crtime_tab3"};
-	private int[] rids = {R.id.content_tab3, R.id.crtime_tab3};
+	private String[] ids = {"title_tab3","crtime_tab3"};
+	private int[] rids = {R.id.title_tab3, R.id.crtime_tab3};
 	
 	private XListView mListView;
 	private SimpleAdapter mSimpleAdapter;
@@ -120,7 +120,7 @@ public class Tab3Fragment extends Activity implements IXListViewListener{
 				Info info = info_list.get(i);
 				Map<String, Object> map = new HashMap<String, Object>();
 				map.put("id", info.getId());
-				map.put("content_tab3", info.getContent());
+				map.put("title_tab3", info.getContent());
 				map.put("crtime_tab3", info.getCrtime());
 				data.add(map);
 			}

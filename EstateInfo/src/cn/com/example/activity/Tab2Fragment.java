@@ -1,5 +1,6 @@
 package cn.com.example.activity;
 
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,8 +23,8 @@ import cn.com.example.domain.CItem;
 
 public class Tab2Fragment extends Activity {
 
-	private static final String[] city_strs = new String[]{"尔湾","库格牧场","安大略","奇诺岗","约巴林达","阿卡迪亚","东谷","钻石吧","罗兰岗","核桃"};
-	private static final String[] price_strs = new String[]{"50万以下","50万~100万","100万~150万","150万~200万","200万以上"};
+	private static final String[] city_strs = new String[]{"不限","尔湾","库格牧场","安大略","奇诺岗","约巴林达","阿卡迪亚","东谷","钻石吧","罗兰岗","核桃"};
+	private static final String[] price_strs = new String[]{"不限","50万以下","50万~100万","100万~150万","150万~200万","200万以上"};
 	private static final List<CItem> city = new ArrayList<CItem>();//{"城市一","城市二","城市三","城市四","城市五"};
 	private static final List<CItem> price = new ArrayList<CItem>();//{"价格一","价格二","价格三","价格四","价格五"};
 	private static final List<CItem> type = new ArrayList<CItem>();//{"公寓","别墅"};
@@ -53,6 +54,8 @@ public class Tab2Fragment extends Activity {
 			city.add(citem_city);
 		}
 		
+		CItem citem_type = new CItem("-1", "不限");
+		type.add(citem_type);
 		CItem citem_type0 = new CItem("0","公寓");
 		type.add(citem_type0);
 		CItem citem_type1 = new CItem("1","独立屋");
@@ -64,11 +67,13 @@ public class Tab2Fragment extends Activity {
 			price.add(citem_price);
 		}
 		
+		CItem citem_score = new CItem("0","不限");
 		CItem citem_score0 = new CItem("6","6及6分以下");
 		CItem citem_score1 = new CItem("7","7");
 		CItem citem_score2 = new CItem("8","8");
 		CItem citem_score3 = new CItem("9","9");
 		CItem citem_score4 = new CItem("10","10");
+		score.add(citem_score);
 		score.add(citem_score0);
 		score.add(citem_score1);
 		score.add(citem_score2);
@@ -83,8 +88,10 @@ public class Tab2Fragment extends Activity {
 		around.add(citem_around1);
 		around.add(citem_around2);
 		
+		CItem citem_pool = new CItem("-1", "不限");
 		CItem citem_pool0 = new CItem("0","不带");
 		CItem citem_pool1 = new CItem("1","带");
+		pool.add(citem_pool);
 		pool.add(citem_pool0);
 		pool.add(citem_pool1);
 	}
@@ -163,17 +170,27 @@ public class Tab2Fragment extends Activity {
 			Spinner spinner_pool = (Spinner)findViewById(R.id.spinner_pool);
 			
 			CItem city_sel = (CItem)spinner_city.getSelectedItem();
-			city_sel.getValue();
-			it.putExtra("city", city_sel.getValue());
+			String city = city_sel.getValue();
+			if (city_strs[0].equals(city))
+				it.putExtra("city", "");
+			else{
+				try{
+					city = URLEncoder.encode(city, "utf-8");
+				}catch(Exception e){
+					e.printStackTrace();
+				}
+				it.putExtra("city", city);
+			}
 			
 			String lprice = "0";
 			String rprice = "0";
 			CItem price_sel = (CItem)spinner_price.getSelectedItem();
 			switch(price_sel.getID()){
-				case "0": lprice = "0";rprice = "500000";break;
-				case "1": lprice = "500000";rprice = "1000000";break;
-				case "2": lprice = "1000000";rprice = "1500000";break;
-				case "3": lprice = "1500000";rprice = "2000000";break;
+				case "0": break; 
+				case "1": lprice = "0";rprice = "500000";break;
+				case "2": lprice = "500000";rprice = "1000000";break;
+				case "3": lprice = "1000000";rprice = "1500000";break;
+				case "4": lprice = "1500000";rprice = "2000000";break;
 				default: lprice = "0";rprice = "500000";
 			}
 			it.putExtra("lprice", lprice);
