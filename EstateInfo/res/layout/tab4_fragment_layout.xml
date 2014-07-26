@@ -4,22 +4,22 @@
     android:layout_height="match_parent"
     android:background="@drawable/bj_huise" >
 
-    <!--
-         <include
+    <include
         android:id="@+id/top"
         android:layout_alignParentTop="true"
         layout="@layout/toptitle" />
-    -->
 
-    <ImageView
+    <!--
+         <ImageView
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="50dp" />
+    -->
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/title"
+        android:layout_below="@id/top"
         android:orientation="vertical" >
 
         <ImageView

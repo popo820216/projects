@@ -4,15 +4,15 @@
     android:layout_height="match_parent"
     android:background="@drawable/bj_huise" >
 
-    <ImageView
-        android:id="@+id/title"
-        android:layout_width="match_parent"
-        android:layout_height="50dp" />
+    <include
+        android:id="@+id/top"
+        android:layout_alignParentTop="true"
+        layout="@layout/toptitle" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/title"
+        android:layout_below="@id/top"
         android:orientation="vertical" >
 
         <Spinner

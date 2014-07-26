@@ -9,20 +9,29 @@
         android:layout_height="match_parent"
         android:orientation="vertical" >
 
-        <LinearLayout
-            android:id="@+id/title"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:gravity="center_vertical"
-            android:orientation="vertical" >
+            android:background="@drawable/titlie_shouye_1"
+            android:orientation="horizontal" >
 
             <ImageView
                 android:id="@+id/back"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
                 android:layout_marginLeft="20dp"
                 android:background="@drawable/fanhui_icon" />
-        </LinearLayout>
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:textColor="#fff"
+                android:textSize="18dp" />
+        </RelativeLayout>
 
         <cn.com.example.customview.CustomScrollView
             android:layout_width="match_parent"
@@ -46,13 +55,13 @@
 
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="223dp">
+                        android:layout_height="223dp" >
 
                         <LinearLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
                             android:layout_alignParentBottom="true"
                             android:background="#99000000"
-                            android:layout_width="fill_parent"
-                            android:layout_height="30dp"
                             android:gravity="center_vertical"
                             android:orientation="horizontal" >
 
@@ -64,10 +73,10 @@
                             </ImageView>
 
                             <TextView
-                                android:layout_marginLeft="10dp"
-                                android:layout_width="wrap_content"
+                                android:id="@+id/address"
+                                android:layout_width="200dp"
                                 android:layout_height="wrap_content"
-                                android:text="加州 洛杉矶 库格牧场"
+                                android:layout_marginLeft="10dp"
                                 android:textColor="#fff"
                                 android:textSize="15dp" />
 
@@ -75,8 +84,8 @@
                                 android:id="@+id/viewGroup"
                                 android:layout_width="fill_parent"
                                 android:layout_height="10dp"
-                                 android:layout_marginLeft="10dp"
                                 android:layout_centerInParent="true"
+                                android:layout_marginLeft="10dp"
                                 android:gravity="center_horizontal"
                                 android:orientation="horizontal" >
                             </LinearLayout>
@@ -114,7 +123,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="bottom"
                                 android:layout_marginLeft="5dp"
-                                android:text="售价"
+                                android:text="售价(美元)"
                                 android:textColor="#000"
                                 android:textSize="15dp" />
                         </LinearLayout>
@@ -129,7 +138,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="约RMB："
+                                android:text=""
                                 android:textColor="#f00"
                                 android:textSize="15dp" />
 
@@ -266,13 +275,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
-                        android:text="产品编号：" />
+                        android:text="房屋编号：" />
 
                     <TextView
+                        android:id="@+id/fangwubianhao"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
-                        android:text="234235235"
                         android:textColor="#000" />
                 </LinearLayout>
                 <!-- 详情 -->
@@ -295,13 +304,13 @@
                             android:layout_width="80dp"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="20dp"
-                            android:text="房      龄："
+                            android:text="年      份："
                             android:textSize="11dp" />
 
                         <TextView
+                            android:id="@+id/year"
                             android:layout_width="50dp"
                             android:layout_height="wrap_content"
-                            android:text="3年"
                             android:textColor="#000"
                             android:textSize="11dp" />
 
@@ -312,9 +321,9 @@
                             android:textSize="11dp" />
 
                         <TextView
+                            android:id="@+id/mianji"
                             android:layout_width="70dp"
                             android:layout_height="wrap_content"
-                            android:text="200平方米"
                             android:textColor="#000"
                             android:textSize="11dp" />
                     </LinearLayout>
@@ -333,9 +342,9 @@
                             android:textSize="11dp" />
 
                         <TextView
+                            android:id="@+id/defen"
                             android:layout_width="50dp"
                             android:layout_height="wrap_content"
-                            android:text="10分"
                             android:textColor="#000"
                             android:textSize="11dp" />
 
@@ -346,9 +355,9 @@
                             android:textSize="11dp" />
 
                         <TextView
+                            android:id="@+id/wuyefei"
                             android:layout_width="70dp"
                             android:layout_height="wrap_content"
-                            android:text="$10/月"
                             android:textColor="#000"
                             android:textSize="11dp" />
                     </LinearLayout>
@@ -367,9 +376,9 @@
                             android:textSize="11dp" />
 
                         <TextView
+                            android:id="@+id/quyu"
                             android:layout_width="50dp"
                             android:layout_height="wrap_content"
-                            android:text="华人区"
                             android:textColor="#000"
                             android:textSize="11dp" />
 
@@ -380,9 +389,9 @@
                             android:textSize="11dp" />
 
                         <TextView
+                            android:id="@+id/youchi"
                             android:layout_width="70dp"
                             android:layout_height="wrap_content"
-                            android:text="不带"
                             android:textColor="#000"
                             android:textSize="11dp" />
                     </LinearLayout>
@@ -406,9 +415,9 @@
                         android:textSize="20dp" />
 
                     <TextView
+                        android:id="@+id/shoufu"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="198万RMB"
                         android:textColor="#f00"
                         android:textSize="20dp" />
                 </LinearLayout>
@@ -436,10 +445,10 @@
                     android:gravity="center_vertical" >
 
                     <TextView
+                        android:id="@+id/content"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:padding="20dp"
-                        android:text="物业介绍物业介绍物业介绍物业介绍物业介绍物业介绍物业介绍物业介绍物业介绍物业介绍物业介绍物业介绍物业介绍物业介绍物业介绍物业介绍物业介绍物业介绍物业介绍物业介绍物业介绍物业介绍物业介绍物业介绍"
                         android:textSize="13dp" />
                 </LinearLayout>
 
@@ -466,13 +475,13 @@
 
         <ImageView
             android:id="@+id/contactus "
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
             android:layout_width="399dp"
             android:layout_height="51dp"
             android:layout_alignParentBottom="true"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="30dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:src="@drawable/lianxiwomen_icon" >
         </ImageView>
     </RelativeLayout>

@@ -5,35 +5,35 @@
     android:background="@drawable/bj_huise"
     android:orientation="vertical" >
 
-    <!--
-        <include
+    <include
         android:id="@+id/search_result_top"
         android:layout_alignParentTop="true"
         layout="@layout/searchtitle" />
-    -->
 
-    <ImageView
+    <!--
+         <ImageView
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="50dp" />
+    -->
 
     <cn.com.example.customview.XListView
         android:id="@+id/xListView"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_below="@id/title"
+        android:layout_below="@id/search_result_top"
         android:cacheColorHint="#00000000" >
     </cn.com.example.customview.XListView>
-    
-    <TextView 
-        android:id = "@+id/result_count"
+
+    <TextView
+        android:id="@+id/result_count"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/title"
-        android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
         android:text="未找到指定条件的结果"
         android:textSize="20dp"
-        android:visibility="invisible"/>
+        android:visibility="invisible" />
 
 </RelativeLayout>

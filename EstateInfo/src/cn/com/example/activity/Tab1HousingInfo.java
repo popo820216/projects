@@ -1,14 +1,19 @@
 package cn.com.example.activity;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
+import android.app.AlertDialog.Builder;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v4.view.PagerAdapter;
@@ -26,6 +31,7 @@ import android.widget.TextView;
 import cn.com.example.customview.MyDialog;
 import cn.com.example.customview.MyDialog.LeaveMeetingDialogListener;
 import cn.com.example.domain.House;
+import cn.com.example.utils.HttpAccessUtil;
 
 public class Tab1HousingInfo extends Activity implements LocationListener {
 
@@ -50,13 +56,16 @@ public class Tab1HousingInfo extends Activity implements LocationListener {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.tab1housinginfo);
-		
+
 		String housestr = getIntent().getStringExtra("house");
-		System.out.println("详细页面："+housestr);
+		System.out.println("详细页面：" + housestr);
 		house = House.convertJsonToBean(housestr);
 
-		LinearLayout title = (LinearLayout) this.findViewById(R.id.title);
-		title.setBackgroundResource(R.drawable.fangyuan_title);
+		// LinearLayout title = (LinearLayout) this.findViewById(R.id.title);
+		// title.setBackgroundResource(R.drawable.fangyuan_title);
+		TextView title = (TextView) this.findViewById(R.id.title);
+		title.setText("房源信息");
+
 		ImageView back = (ImageView) this.findViewById(R.id.back);
 		contactus = (ImageView) this.findViewById(R.id.contactus);
 
@@ -74,9 +83,14 @@ public class Tab1HousingInfo extends Activity implements LocationListener {
 									dialog.dismiss();
 									break;
 								case R.id.consulting:
-									Intent intent = new Intent(Tab1HousingInfo.this, Tab1LeaveMsg.class);
+									Intent intent = new Intent(
+											Tab1HousingInfo.this,
+											Tab1LeaveMsg.class);
 									intent.putExtra("hid", house.getId());
 									startActivityForResult(intent, 0);
+									break;
+								case R.id.tel:
+									showtel();
 									break;
 								}
 							}
@@ -119,22 +133,46 @@ public class Tab1HousingInfo extends Activity implements LocationListener {
 		mPager.setAdapter(GuidePageAdapter = new GuidePageAdapter(this));
 		mPager.setOnPageChangeListener(new GuidePageChangeListener());
 
-		
 		initView();
 		// getLocation();
 		setupWebView();
 		this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
 	}
-	
-	private void initView(){
-		TextView rmb = (TextView)this.findViewById(R.id.rmb);
-		rmb.setText(house.getPrice_rmb());
-		TextView house_type = (TextView)this.findViewById(R.id.house_type);
-		rmb.setText(house.getType());
-		TextView house_area = (TextView)this.findViewById(R.id.house_area);
-		rmb.setText(house.getArea());
-		
+
+	private void initView() {
+		TextView address = (TextView) this.findViewById(R.id.address);
+		address.setText(house.getAddress());
+		TextView rmb = (TextView) this.findViewById(R.id.rmb);
+		rmb.setText(house.getPrice());
+		System.out.println("美元:" + house.getPrice());
+		TextView house_type = (TextView) this.findViewById(R.id.house_type);
+		house_type.setText(house.getType());
+		TextView house_area = (TextView) this.findViewById(R.id.house_area);
+		house_area.setText(house.getArea());
+		System.out.println("房屋面积：" + house.getArea());
+
+		TextView fangwubianhao = (TextView) this
+				.findViewById(R.id.fangwubianhao);
+		fangwubianhao.setText(house.getId());
+
+		TextView year = (TextView) this.findViewById(R.id.year);
+		year.setText(house.getBuildyear());
+		TextView mianji = (TextView) this.findViewById(R.id.mianji);
+		mianji.setText(house.getCovers());
+		TextView defen = (TextView) this.findViewById(R.id.defen);
+		defen.setText(house.getDistrictscore());
+		TextView wuye = (TextView) this.findViewById(R.id.wuyefei);
+		wuye.setText(house.getPropertyfee());
+		TextView quyu = (TextView) this.findViewById(R.id.quyu);
+		quyu.setText(house.getRegionnature());
+		TextView youchi = (TextView) this.findViewById(R.id.youchi);
+		youchi.setText(house.getSwimmingpool());
+		TextView shoufu = (TextView) this.findViewById(R.id.shoufu);
+		shoufu.setText(house.getDownpayment_rmb());
+		TextView content = (TextView) this.findViewById(R.id.content);
+		content.setText(house.getMemo());
+
 	}
 
 	private void getLocation() {
@@ -286,6 +324,60 @@ public class Tab1HousingInfo extends Activity implements LocationListener {
 	public void onStatusChanged(String arg0, int arg1, Bundle arg2) {
 		// TODO Auto-generated method stub
 
+	}
+
+	ProgressDialog progressDialog;
+
+	class MyThread extends Thread {
+
+		public void doStart() {
+			progressDialog = ProgressDialog.show(Tab1HousingInfo.this, "提示",
+					"正在请求数据请稍等......", false);
+			progressDialog.setCancelable(true);
+			this.start();
+		}
+
+		@Override
+		public void run() {
+			// TODO Auto-generated method stub
+			// try {
+			System.out.println("" + HttpAccessUtil.ip
+					+ "house/house.php?op=list&hid=" + house.getId());
+			String str = HttpAccessUtil.connServerForResult(HttpAccessUtil.ip
+					+ "house/house.php?op=list&hid=" + house.getId());
+
+			System.out.println("第一页返回数据:" + str);
+
+			// getData(str);
+			// new Thread(preparedBitmap).start();
+
+			// }
+			// finally {
+			progressDialog.dismiss();
+			// progressDialog = null;
+			// }
+		}
+	}
+
+	private void showtel() {
+		AlertDialog alertDialog = new AlertDialog.Builder(Tab1HousingInfo.this)
+				.setTitle("提示")
+				.setMessage("是否拨打400-041-7515")
+				.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int which) {
+						Intent phoneIntent = new Intent(
+								"android.intent.action.CALL", Uri.parse("tel:"
+										+ "400-041-7515"));
+						// 鍚姩
+						startActivity(phoneIntent);
+					}
+				})
+				.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int which) {
+						dialog.dismiss();
+					}
+				}).create(); // 创建对话
+		alertDialog.show(); // 显示对话框
 	}
 
 }

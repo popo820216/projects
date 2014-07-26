@@ -20,6 +20,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 import android.widget.SimpleAdapter.ViewBinder;
 import cn.com.example.customview.XListView;
 import cn.com.example.customview.XListView.IXListViewListener;
@@ -53,8 +54,8 @@ public class Tab1Fragment extends Activity implements IXListViewListener {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.tab1_fragment_layout);
-		ImageView title = (ImageView) this.findViewById(R.id.title);
-		title.setBackgroundResource(R.drawable.titlie_shouye);
+		TextView title = (TextView) this.findViewById(R.id.title);
+		title.setText("美房源");
 
 		mListView = (XListView) findViewById(R.id.tab1_xListView);
 		mListView.setPullLoadEnable(true);
@@ -68,7 +69,7 @@ public class Tab1Fragment extends Activity implements IXListViewListener {
 					long arg3) {
 				Intent intent = new Intent(Tab1Fragment.this,
 						Tab1HousingInfo.class);
-				House house = house_list.get(arg2-1);
+				House house = house_list.get(arg2 - 1);
 				String str = house.convertToString(house);
 				intent.putExtra("house", str);
 				startActivityForResult(intent, 0);
@@ -260,9 +261,9 @@ public class Tab1Fragment extends Activity implements IXListViewListener {
 	class MyThread extends Thread {
 
 		public void doStart() {
-			 progressDialog = ProgressDialog.show(Tab1Fragment.this, "提示",
-			 "正在请求数据请稍等......", false);
-			 progressDialog.setCancelable(true);
+			progressDialog = ProgressDialog.show(Tab1Fragment.this, "提示",
+					"正在请求数据请稍等......", false);
+			progressDialog.setCancelable(true);
 			this.start();
 		}
 
@@ -279,10 +280,10 @@ public class Tab1Fragment extends Activity implements IXListViewListener {
 
 			getData(str);
 			new Thread(preparedBitmap).start();
-			
+
 			// }
 			// finally {
-			 progressDialog.dismiss();
+			progressDialog.dismiss();
 			// progressDialog = null;
 			// }
 		}

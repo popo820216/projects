@@ -12,39 +12,44 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import cn.com.example.utils.HttpAccessUtil;
 
-public class Tab1LeaveMsg extends Activity{
+public class Tab1LeaveMsg extends Activity {
 	private EditText et_name;
 	private EditText et_phone;
 	private EditText et_email;
 	private EditText et_msg;
-	
+
 	private Map<String, Object> params;
 	private String uri = HttpAccessUtil.ip + "";
 	private Tab1LeaveMsg context;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.tab1_leavemsg_layout);
-		
-		ImageView back = (ImageView)findViewById(R.id.tab1_leavemsg_back);
+
+		TextView title = (TextView) this.findViewById(R.id.title);
+		title.setText("房产资讯");
+
+		ImageView back = (ImageView) findViewById(R.id.tab1_leavemsg_back);
 		back.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
 				finish();
 			}
 		});
-		
+
 		context = this;
-		
-		et_name = (EditText)findViewById(R.id.msg_name);
-		et_phone = (EditText)findViewById(R.id.msg_phone);
-		et_email = (EditText)findViewById(R.id.msg_email);
-		et_msg = (EditText)findViewById(R.id.msg_message);
-		
-		ImageView submit_btn = (ImageView)findViewById(R.id.msg_submit);
+
+		et_name = (EditText) findViewById(R.id.msg_name);
+		et_phone = (EditText) findViewById(R.id.msg_phone);
+		et_email = (EditText) findViewById(R.id.msg_email);
+		et_msg = (EditText) findViewById(R.id.msg_message);
+
+		ImageView submit_btn = (ImageView) findViewById(R.id.msg_submit);
 		submit_btn.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
@@ -52,43 +57,44 @@ public class Tab1LeaveMsg extends Activity{
 				String phone = et_phone.getText().toString();
 				String email = et_email.getText().toString();
 				String msg = et_msg.getText().toString();
-				
+
 				params = new HashMap<String, Object>();
-				
+
 				params.put("name", name);
 				params.put("phone", phone);
 				params.put("email", email);
 				params.put("msg", msg);
-				
+
 				new Thread(submit).start();
 			}
 		});
 	}
-	
+
 	ContextRunnable submit = new ContextRunnable(this) {
 		@Override
 		public void run() {
-		//	String result = HttpAccessUtil.post(uri, params);
+			// String result = HttpAccessUtil.post(uri, params);
 			Message msg = new Message();
 			msg.what = 0;
 			handler.sendMessage(msg);
 		}
 	};
-	
-	Handler handler = new Handler(){
+
+	Handler handler = new Handler() {
 		public void handleMessage(Message msg) {
-			if (msg.what == 0){
+			if (msg.what == 0) {
 				context.finish();
 			}
 		};
 	};
-	
-	abstract class ContextRunnable implements Runnable{
+
+	abstract class ContextRunnable implements Runnable {
 		@Override
 		abstract public void run();
+
 		private Context context;
-		
-		public ContextRunnable(Context context){
+
+		public ContextRunnable(Context context) {
 			this.context = context;
 		}
 	}

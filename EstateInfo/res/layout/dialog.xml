@@ -7,10 +7,10 @@
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:orientation="vertical" >
 
         <LinearLayout
@@ -39,19 +39,20 @@
             </TextView>
 
             <LinearLayout
+                android:id="@+id/tel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:background="@drawable/xiabian_bj"
+                android:gravity="center"
                 android:orientation="horizontal" >
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    
                     android:text="中国服务热线："
                     android:textSize="16dp" >
                 </TextView>
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -63,10 +64,10 @@
         </LinearLayout>
 
         <ImageView
-            android:layout_marginTop="10dp"
             android:id="@+id/backdialog"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:scaleType="centerInside"
             android:src="@drawable/quxiao_icon" >
         </ImageView>

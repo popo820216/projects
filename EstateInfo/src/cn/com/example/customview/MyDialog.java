@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import cn.com.example.activity.R;
 
@@ -37,6 +38,8 @@ public class MyDialog extends Dialog  implements OnClickListener {
         initViews();
     }
     private void initViews(){  
+    	 LinearLayout tel = (LinearLayout)this.findViewById(R.id.tel);
+    	 tel.setOnClickListener(this);
     	 backdialog = (ImageView)this.findViewById(R.id.backdialog);
     	 consulting = (TextView)this.findViewById(R.id.consulting);
     	 backdialog.setOnClickListener(this);  
