@@ -62,7 +62,8 @@ public class Tab3Fragment extends Activity implements IXListViewListener {
 
 		setUrl();
 		url.append("&page=1");
-
+		
+		info_list = new ArrayList<Info>();
 		progressDialog = CustomProgressdialog.createDialog(this);
 		// progressDialog.setMessage("正在加载中...");
 		progressDialog.show();
